@@ -1,0 +1,10 @@
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\bin\Debug\SerialTransmissionSimulator.exe.config
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\bin\Debug\SerialTransmissionSimulator.exe
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\bin\Debug\SerialTransmissionSimulator.pdb
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\obj\Debug\SerialTransmissionSimulator.csprojAssemblyReference.cache
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\obj\Debug\SerialTransmissionSimulator.Form1.resources
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\obj\Debug\SerialTransmissionSimulator.Properties.Resources.resources
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\obj\Debug\SerialTransmissionSimulator.csproj.GenerateResource.cache
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\obj\Debug\SerialTransmissionSimulator.csproj.CoreCompileInputs.cache
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\obj\Debug\SerialTransmissionSimulator.exe
+C:\Users\Agata Polejowska\source\repos\SerialTransmissionSimulator\SerialTransmissionSimulator\obj\Debug\SerialTransmissionSimulator.pdb
