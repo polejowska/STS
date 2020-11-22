@@ -22,47 +22,53 @@ namespace SerialTransmissionSimulator
         public string convertToBinary(string textToConvert)
         {
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Insert(0, 0);
 
-            foreach(char L in textToConvert.ToString())
+            foreach (char L in textToConvert.ToString())
             {
+                // Formatowanie tekstu, L - value, 2 - base
                 stringBuilder.Append(Convert.ToString(L, 2));
                 stringBuilder.Append(11);
                 stringBuilder.Append(" ");
                 stringBuilder.Append(0);
             }
 
-            stringBuilder.Insert(0, 0);
-            string newT;
-            newT = stringBuilder.ToString();
+            string newText;
+            newText = stringBuilder.ToString();
 
-            int x = newT.Length;
+            int x = newText.Length;
 
-            return newT.Remove(x-2);
+            return newText.Remove(x-2);
+        }
+
+        private void sendToConverter_Click(object sender, EventArgs e)
+        {
+            converterBinaryCodeBox.Text = convertToBinary(senderTextBox.Text);
         }
 
         public string convertToASCII(string binaryCode)
         {
             char c = ' ';
+            // Rozdzielenie słów na podstawie c
             string[] splitList = binaryCode.Split(c);
 
             foreach (string s in splitList)
             {
+                // Usunięcie bitów startu i stopu
                 s.Remove(9);
                 s.Remove(8);
                 s.Remove(0);
             }
 
-            string newW = string.Join("", splitList);
-
-            int wordLength = newW.Length;
-            int elementsNumber = (wordLength - 1) / 7;
+            string newText = string.Join("", splitList);
+            // Ilość znaków
             int step = 6;
 
             List<Byte> bytesList = new List<Byte>();
 
-            for(int i = 0; i < newW.Length; i+= step)
+            for(int i = 0; i < newText.Length; i+= step)
             {
-                bytesList.Add(Convert.ToByte(newW.Substring(i, step), 2));
+                bytesList.Add(Convert.ToByte(newText.Substring(i, step), 2));
             }
 
             byte[] bytesNewArray = new byte[bytesList.Count];
@@ -72,7 +78,40 @@ namespace SerialTransmissionSimulator
             return ASCIIEncoding.ASCII.GetString(bytesNewArray);
         }
 
-        private static string ConvertToTxtString(String binaryCode)
+        private void sendToReceiver_click(object sender, EventArgs e)
+        {
+            string sentText = senderTextBox.Text;
+            char x = ' ';
+            string[] wordsInText = sentText.Split(x);
+
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\Words.txt");
+            string[] badWords = File.ReadAllLines(path);
+
+            for (int i = 0; i < wordsInText.Length; i++)
+            {
+                for (int j = 0; j < badWords.Length; j++)
+                {
+                    if (wordsInText[i].Contains(badWords[j]))
+                    {
+                        foreach (char c in wordsInText[i])
+                        {
+                            char w = '*';
+                            wordsInText[i] = wordsInText[i].Replace(c, w);
+                        }
+                        receiverTextBox.Text = wordsInText[i];
+                    }
+                    else
+                    {
+                        senderTextBox.Text = receiverTextBox.Text;
+                    }
+                    string newWord = string.Join(" ", wordsInText);
+                    senderTextBox.Text = newWord;
+                    receiverTextBox.Text = newWord;
+                }
+            }
+        }
+        
+        private static string ConvertToUTF8String(String binaryCode)
         {
             const int step = 8;
 
@@ -87,55 +126,12 @@ namespace SerialTransmissionSimulator
             bytes.CopyTo(newByteArray);
             return UTF8Encoding.UTF8.GetString(newByteArray);
         }
-
-        public string save()
+        
+        public string saveText()
         {
             byte[] bArray = ASCIIEncoding.ASCII.GetBytes(senderTextBox.Text);
             string savedText = ASCIIEncoding.ASCII.GetString(bArray);
             return savedText;
-        }
-
-
-        private void sendToConverter_Click(object sender, EventArgs e)
-        {
-            converterBinaryCodeBox.Text = convertToBinary(senderTextBox.Text);
-        }
-
-        private void sendToReceiver(object sender, EventArgs e)
-        {
-            string sentText = senderTextBox.Text;
-            char x = ' ';
-            string[] splitText = sentText.Split(x);
-            
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\Words.txt");
-            string[] badWords = File.ReadAllLines(path);
-
-            // Testing
-            Console.WriteLine(badWords[3].ToString());
-
-
-            for (int i = 0; i < splitText.Length; i++)
-            {
-                for (int j = 0; j < badWords.Length; j++)
-                {
-                    if (splitText[i].Contains(badWords[j]))
-                    {
-                        foreach (char c in splitText[i])
-                        {
-                            char w = '*';
-                            splitText[i] = splitText[i].Replace(c, w);
-                        }
-                        receiverTextBox.Text = splitText[i];
-                    }
-                    else
-                    {
-                        senderTextBox.Text = receiverTextBox.Text;
-                    }
-                    string newWord = string.Join(" ", splitText);
-                    senderTextBox.Text = newWord;
-                    receiverTextBox.Text = newWord;
-                }
-            }
         }
 
         private void clearSender_Click(object sender, EventArgs e)
