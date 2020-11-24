@@ -43,6 +43,14 @@
             this.sender = new System.Windows.Forms.Label();
             this.converter = new System.Windows.Forms.Label();
             this.receiver = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.whiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // senderTextBox
@@ -59,6 +67,7 @@
             // converterBinaryCodeBox
             // 
             this.converterBinaryCodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.converterBinaryCodeBox.Enabled = false;
             this.converterBinaryCodeBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.converterBinaryCodeBox.Location = new System.Drawing.Point(99, 222);
             this.converterBinaryCodeBox.Multiline = true;
@@ -70,6 +79,7 @@
             // receiverTextBox
             // 
             this.receiverTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.receiverTextBox.Enabled = false;
             this.receiverTextBox.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.receiverTextBox.Location = new System.Drawing.Point(99, 379);
             this.receiverTextBox.Multiline = true;
@@ -204,12 +214,79 @@
             this.receiver.TabIndex = 13;
             this.receiver.Text = "RECEIVER";
             // 
+            // saveButton
+            // 
+            this.saveButton.BackColor = System.Drawing.Color.GhostWhite;
+            this.saveButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.saveButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.saveButton.FlatAppearance.BorderSize = 2;
+            this.saveButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.Location = new System.Drawing.Point(525, 456);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(150, 37);
+            this.saveButton.TabIndex = 14;
+            this.saveButton.Text = "SAVE";
+            this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(760, 24);
+            this.menuStrip1.TabIndex = 15;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeBackgroundToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // changeBackgroundToolStripMenuItem
+            // 
+            this.changeBackgroundToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.blueToolStripMenuItem,
+            this.whiteToolStripMenuItem,
+            this.grayToolStripMenuItem});
+            this.changeBackgroundToolStripMenuItem.Name = "changeBackgroundToolStripMenuItem";
+            this.changeBackgroundToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.changeBackgroundToolStripMenuItem.Text = "Change background";
+            // 
+            // blueToolStripMenuItem
+            // 
+            this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blueToolStripMenuItem.Text = "Blue";
+            this.blueToolStripMenuItem.Click += new System.EventHandler(this.blueToolStripMenuItem_Click);
+            // 
+            // whiteToolStripMenuItem
+            // 
+            this.whiteToolStripMenuItem.Name = "whiteToolStripMenuItem";
+            this.whiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.whiteToolStripMenuItem.Text = "White";
+            this.whiteToolStripMenuItem.Click += new System.EventHandler(this.whiteToolStripMenuItem_Click);
+            // 
+            // grayToolStripMenuItem
+            // 
+            this.grayToolStripMenuItem.Name = "grayToolStripMenuItem";
+            this.grayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.grayToolStripMenuItem.Text = "Gray";
+            this.grayToolStripMenuItem.Click += new System.EventHandler(this.grayToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(760, 554);
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.receiver);
             this.Controls.Add(this.converter);
             this.Controls.Add(this.sender);
@@ -221,9 +298,13 @@
             this.Controls.Add(this.receiverTextBox);
             this.Controls.Add(this.converterBinaryCodeBox);
             this.Controls.Add(this.senderTextBox);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Serial Transmission Simulator";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,6 +325,13 @@
         private System.Windows.Forms.Label sender;
         private System.Windows.Forms.Label converter;
         private System.Windows.Forms.Label receiver;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeBackgroundToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem whiteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grayToolStripMenuItem;
     }
 }
 

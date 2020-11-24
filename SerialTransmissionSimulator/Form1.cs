@@ -22,14 +22,18 @@ namespace SerialTransmissionSimulator
         public string convertToBinary(string textToConvert)
         {
             StringBuilder stringBuilder = new StringBuilder();
+            // Start bit (0)
             stringBuilder.Insert(0, 0);
 
             foreach (char L in textToConvert.ToString())
             {
-                // Formatowanie tekstu, L - value, 2 - base
+                // Formatting text, L - value, 2 - base
                 stringBuilder.Append(Convert.ToString(L, 2));
+                // Stop bits (11)
                 stringBuilder.Append(11);
+                // Space
                 stringBuilder.Append(" ");
+                // Stop bit (0)
                 stringBuilder.Append(0);
             }
 
@@ -49,19 +53,17 @@ namespace SerialTransmissionSimulator
         public string convertToASCII(string binaryCode)
         {
             char c = ' ';
-            // Rozdzielenie słów na podstawie c
+            // Splitting text based on space char
             string[] splitList = binaryCode.Split(c);
 
             foreach (string s in splitList)
             {
-                // Usunięcie bitów startu i stopu
-                s.Remove(9);
                 s.Remove(8);
                 s.Remove(0);
             }
 
             string newText = string.Join("", splitList);
-            // Ilość znaków
+            // Number of characters
             int step = 6;
 
             List<Byte> bytesList = new List<Byte>();
@@ -72,7 +74,6 @@ namespace SerialTransmissionSimulator
             }
 
             byte[] bytesNewArray = new byte[bytesList.Count];
-
             bytesList.CopyTo(bytesNewArray);
 
             return ASCIIEncoding.ASCII.GetString(bytesNewArray);
@@ -127,11 +128,21 @@ namespace SerialTransmissionSimulator
             return UTF8Encoding.UTF8.GetString(newByteArray);
         }
         
-        public string saveText()
+        public void saveText()
         {
+            string fileName = "receivedText.txt";
             byte[] bArray = ASCIIEncoding.ASCII.GetBytes(senderTextBox.Text);
             string savedText = ASCIIEncoding.ASCII.GetString(bArray);
-            return savedText;
+
+            string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            File.WriteAllText(destPath, savedText);
+
+            MessageBox.Show("Saved to: " + destPath + fileName);
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            saveText();
         }
 
         private void clearSender_Click(object sender, EventArgs e)
@@ -149,5 +160,19 @@ namespace SerialTransmissionSimulator
             receiverTextBox.Clear();
         }
 
+        private void blueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.LightBlue;
+        }
+
+        private void whiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.White;
+        }
+
+        private void grayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BackColor = Color.Gainsboro;
+        }
     }
 }
